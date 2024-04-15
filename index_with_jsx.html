@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Add React to Website</title>
+    <!-- BABEL LIBRARY -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1></h1>
+    </header>
+
+    <div id="like_button_container"></div>
+
+    <footer></footer>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <!-- Load our React component. -->
+    <script type="text/babel">
+      "use strict";
+
+      const e = React.createElement;
+
+      class LikeButton extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { counter: 0 };
+        }
+
+        counter = 0;
+
+        render() {
+          return (
+            <div>
+              <h1>Counter: {this.state.counter}</h1>
+              <button
+                onClick={() => {
+                  this.setState({ counter: this.state.counter + 1 });
+                }}
+              >
+                Increase
+              </button>
+
+              {this.state.counter > 10 ? (
+                <p style={{ color: "green" }}>Counter is greater than 10</p>
+              ) : (
+                <p style={{ color: "yellow" }}>Counter is less than 10</p>
+              )}
+
+              <button
+                onClick={() => {
+                  this.setState({ counter: this.state.counter - 1 });
+                }}
+              >
+                Decrease
+              </button>
+            </div>
+          );
+        }
+      }
+
+      const domContainer = document.querySelector("#like_button_container");
+      ReactDOM.render(<LikeButton />, domContainer);
+    </script>
+  </body>
+</html>
